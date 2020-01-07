@@ -42,10 +42,9 @@ $(() => {
     $('#form input').val('');
   });
 
-  $('#todos').delegate('button', 'click', (event) => {  
+  $('#todos').delegate('button', 'click', (event) => {
     var id = $(event.target.parentNode).data('id');
     if ($(event.target).data('action') === 'edit') {
-      console.log(id);
       Todo.readOne(id, (todo) => {
         var updatedText = prompt('Change to?', todo.text);
         if (updatedText !== null && updatedText !== todo.text) {
