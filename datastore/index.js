@@ -10,6 +10,14 @@ var items = {};
 exports.create = (text, callback) => {
   var id = counter.getNextUniqueId();
   items[id] = text;
+  //console.log(items);
+  fs.writeFile(`./datastore/data/${id}.txt`, `${text}`, (err, data) => {
+    if (err) {
+      console.log('ERROR: could not write file', `${text}`, `./data/${id}`);
+    } else {
+      console.log('SUCCESS', `${text}`, `./data/${id}`);
+    }
+  });
   callback(null, { id, text });
 };
 

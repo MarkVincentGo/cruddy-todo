@@ -6,6 +6,12 @@ var counter = 0;
 
 // Private helper functions ////////////////////////////////////////////////////
 
+
+
+// Your first goal is to save the current state of the counter to the hard drive, so it's persisted between server restarts. Do this by rewriting getNextUniqueId to make use of the provided readCounter and writeCounter functions.
+
+
+
 // Zero padded numbers can only be represented as strings.
 // If you don't know what a zero-padded number is, read the
 // Wikipedia entry on Leading Zeros and check out some of code links:
@@ -38,7 +44,23 @@ const writeCounter = (count, callback) => {
 
 // Public API - Fix this function //////////////////////////////////////////////
 
-exports.getNextUniqueId = () => {
+exports.getNextUniqueId = (callback) => {
+  //fs.writeFile(exports.counterFile, data, err);
+
+  //read current counter
+  readCounter((err, count)=>{
+
+    //if it does not exist, function will return zero
+      //use writeCounter to create counterFile and increment zero +1
+    count++;
+    writeCounter(count, (err, string) => (console.log(string)));
+
+
+  });
+
+    //else if it does exist, it will return the current count
+      //use writeCounter to increment current count +1
+
   counter = counter + 1;
   return zeroPaddedNumber(counter);
 };
