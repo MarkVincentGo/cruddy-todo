@@ -35,6 +35,7 @@ app.get('/todo', (req, res) => {
     if (err) {
       res.sendStatus(400);
     } else {
+      console.log(todos);
       res.status(200).json(todos);
     }
   });

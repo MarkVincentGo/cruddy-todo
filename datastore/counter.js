@@ -53,6 +53,8 @@ exports.getNextUniqueId = (callback) => {
     //use writeCounter to create counterFile and increment zero +1
     //else if it does exist, it will return the current count
     //use writeCounter to increment current count +1
+
+    //NOTE: the above comments have been implemented successfully.
     count++;
     writeCounter(count, (err, string) => {
       callback(null, string);
