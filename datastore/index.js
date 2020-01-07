@@ -75,8 +75,7 @@ exports.update = (id, text, callback) => {
         callback(null, {id, text});
       }
     });
-  }
-  else {
+  } else {
     callback(new Error(`No item with id: ${id}`));
   }
 
