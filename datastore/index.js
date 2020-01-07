@@ -8,24 +8,45 @@ var items = {};
 // Public API - Fix these CRUD functions ///////////////////////////////////////
 
 exports.create = (text, callback) => {
-  var id = counter.getNextUniqueId();
-  items[id] = text;
-  //console.log(items);
-  fs.writeFile(`./datastore/data/${id}.txt`, `${text}`, (err, data) => {
-    if (err) {
-      console.log('ERROR: could not write file', `${text}`, `./data/${id}`);
-    } else {
-      console.log('SUCCESS', `${text}`, `./data/${id}`);
+  counter.getNextUniqueId((err, id) => {
+    if (!err) {
+      fs.writeFile(`${path.join(exports.dataDir, id)}.txt`, `${text}`, (err, data) => {
+        if (err) {
+          console.log('ERROR: could not write file', `${text}`, `./data/${id}`);
+        } else {
+          callback(null, {id, text});
+          //console.log('SUCCESS', `${text}`, `./data/${id}`);
+        }
+      });
+
     }
+  //console.log(items);
   });
-  callback(null, { id, text });
+
 };
 
+
+
+
 exports.readAll = (callback) => {
-  var data = _.map(items, (text, id) => {
-    return { id, text };
-  });
-  callback(null, data);
+  var directory = fs.readdirSync(exports.dataDir);
+
+  console.log(directory);
+
+  // ['00009', '00010'];
+
+  //we might need to use the readFile method to extract the full value
+  //of each todo in the array, and return it.
+
+
+  // fs.readFile
+
+
+  // var data = _.map(items, (text, id) => {
+  //   return { id, text };
+  // });
+  // callback(null, data);
+
 };
 
 exports.readOne = (id, callback) => {

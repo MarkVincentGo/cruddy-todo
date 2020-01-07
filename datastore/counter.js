@@ -49,20 +49,16 @@ exports.getNextUniqueId = (callback) => {
 
   //read current counter
   readCounter((err, count)=>{
-
     //if it does not exist, function will return zero
-      //use writeCounter to create counterFile and increment zero +1
+    //use writeCounter to create counterFile and increment zero +1
+    //else if it does exist, it will return the current count
+    //use writeCounter to increment current count +1
     count++;
-    writeCounter(count, (err, string) => (console.log(string)));
-
-
+    writeCounter(count, (err, string) => {
+      callback(null, string);
+    });
   });
 
-    //else if it does exist, it will return the current count
-      //use writeCounter to increment current count +1
-
-  counter = counter + 1;
-  return zeroPaddedNumber(counter);
 };
 
 
